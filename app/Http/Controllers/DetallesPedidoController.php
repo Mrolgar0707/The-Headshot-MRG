@@ -2,64 +2,59 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DetallesPedido;
 use Illuminate\Http\Request;
+use App\Models\DetallePedido;
 
-class DetallesPedidoController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+class DetallesPedidoController extends Controller {
+    public function index() {
+        $detallesPedido = DetallePedido::all();
+        return view('detalles_pedido.index', compact('detallesPedido'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('detalles_pedido.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        // Validar los datos del formulario
+        $request->validate([
+            // Agregar reglas de validación según sea necesario
+        ]);
+
+        // Crear un nuevo detalle de pedido en la base de datos
+        DetallePedido::create($request->all());
+
+        return redirect()->route('detalles_pedido.index')->with('success', 'Detalle de pedido creado exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(DetallesPedido $detallesPedido)
-    {
-        //
+    public function show($id) {
+        $detallePedido = DetallePedido::findOrFail($id);
+        return view('detalles_pedido.show', compact('detallePedido'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(DetallesPedido $detallesPedido)
-    {
-        //
+    public function edit($id) {
+        $detallePedido = DetallePedido::findOrFail($id);
+        return view('detalles_pedido.edit', compact('detallePedido'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, DetallesPedido $detallesPedido)
-    {
-        //
+    public function update(Request $request, $id) {
+        // Validar los datos del formulario
+        $request->validate([
+            // Agregar reglas de validación según sea necesario
+        ]);
+
+        // Actualizar la información del detalle de pedido en la base de datos
+        $detallePedido = DetallePedido::findOrFail($id);
+        $detallePedido->update($request->all());
+
+        return redirect()->route('detalles_pedido.index')->with('success', 'Detalle de pedido actualizado exitosamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(DetallesPedido $detallesPedido)
-    {
-        //
+    public function destroy($id) {
+        // Eliminar un detalle de pedido de la base de datos
+        $detallePedido = DetallePedido::findOrFail($id);
+        $detallePedido->delete();
+
+        return redirect()->route('detalles_pedido.index')->with('success', 'Detalle de pedido eliminado exitosamente.');
     }
 }
