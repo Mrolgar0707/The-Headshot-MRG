@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 
-class UsuariosController extends Controller {
+class UsuarioController extends Controller {
     public function index() {
         $usuarios = Usuario::all();
         return view('usuarios.index', ['usuarios' => $usuarios]);
@@ -20,7 +20,6 @@ class UsuariosController extends Controller {
         $request->validate([
             'usuario' => 'required',
             'contraseña' => 'required',
-            // Agregar otras reglas de validación según sea necesario
         ]);
 
         // Crear un nuevo usuario en la base de datos
