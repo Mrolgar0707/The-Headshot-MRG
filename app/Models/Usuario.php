@@ -11,6 +11,6 @@ class Usuario extends Model {
 
     // Relaciones
     public function pedidos() {
-        return $this->hasMany(Pedido::class);
+        return $this->hasMany(Pedidos::class);
     }
 }

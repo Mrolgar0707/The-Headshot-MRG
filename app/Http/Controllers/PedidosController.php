@@ -2,56 +2,72 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pedidos;
 use Illuminate\Http\Request;
-use App\Models\pedidos;
 
-class PedidosController extends Controller {
-    public function index() {
+class PedidosController extends Controller
+{
+    // Mostrar la lista de pedidos
+    public function index()
+    {
         $pedidos = Pedidos::all();
         return view('pedidos.index', compact('pedidos'));
     }
 
-    public function create() {
+    // Mostrar el formulario para crear un nuevo pedido
+    public function create()
+    {
         return view('pedidos.create');
     }
 
-    public function store(Request $request) {
-        // Validar los datos del formulario
-        $request->validate([
-            // Agregar reglas de validación según sea necesario
+    // Almacenar un nuevo pedido
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'fecha_pedido' => 'required|date',
+            'fecha_envio' => 'required|date',
+            'total' => 'required|numeric',
+            'usuario_id' => 'required|integer|exists:users,id',
         ]);
 
-        // Crear un nuevo pedido en la base de datos
-        Pedidos::create($request->all());
+        Pedidos::create($validatedData);
 
         return redirect()->route('pedidos.index')->with('success', 'Pedido creado exitosamente.');
     }
 
-    public function show($id) {
+    // Mostrar un pedido específico
+    public function show($id)
+    {
         $pedido = Pedidos::findOrFail($id);
         return view('pedidos.show', compact('pedido'));
     }
 
-    public function edit($id) {
+    // Mostrar el formulario para editar un pedido existente
+    public function edit($id)
+    {
         $pedido = Pedidos::findOrFail($id);
         return view('pedidos.edit', compact('pedido'));
     }
 
-    public function update(Request $request, $id) {
-        // Validar los datos del formulario
-        $request->validate([
-            // Agregar reglas de validación según sea necesario
+    // Actualizar un pedido existente
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'fecha_pedido' => 'required|date',
+            'fecha_envio' => 'required|date',
+            'total' => 'required|numeric',
+            'usuario_id' => 'required|integer|exists:users,id',
         ]);
 
-        // Actualizar la información del pedido en la base de datos
         $pedido = Pedidos::findOrFail($id);
-        $pedido->update($request->all());
+        $pedido->update($validatedData);
 
         return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado exitosamente.');
     }
 
-    public function destroy($id) {
-        // Eliminar un pedido de la base de datos
+    // Eliminar un pedido
+    public function destroy($id)
+    {
         $pedido = Pedidos::findOrFail($id);
         $pedido->delete();
 
