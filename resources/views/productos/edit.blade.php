@@ -20,6 +20,15 @@
             <label for="stock">Stock</label>
             <input type="number" class="form-control" id="stock" name="stock" value="{{ $producto->stock }}" required>
         </div>
+        <div class="form-group">
+            <label for="imagen">Imagen</label>
+            <input type="file" class="form-control-file" id="imagen" name="imagen">
+            @if ($producto->imagen)
+                <div class="mt-2">
+                    <img src="{{ asset('storage/' . $producto->imagen) }}" alt="Imagen del producto" width="150">
+                </div>
+            @endif
+        </div>
         <button type="submit" class="btn btn-primary">Actualizar</button>
     </form>
 </div>

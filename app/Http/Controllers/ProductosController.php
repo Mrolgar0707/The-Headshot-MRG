@@ -11,19 +11,30 @@ class ProductosController extends Controller {
         return view('productos.index', compact('productos'));
     }
 
-    public function create() {
+    public function create()
+    {
         return view('productos.create');
     }
 
-    public function store(Request $request) {
-        // Validar los datos del formulario
-        $request->validate([
-            // Agregar reglas de validación según sea necesario
+    public function store(Request $request)
+    {
+        // Validación de los datos
+        $validatedData = $request->validate([
+            'descripcion' => 'required|string|max:255',
+            'pvp' => 'required|numeric',
+            'stock' => 'required|integer',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validación de imagen
         ]);
 
-        // Crear un nuevo producto en la base de datos
-        Productos::create($request->all());
+        if ($request->hasFile('imagen')) {
+            $imagenPath = $request->file('imagen')->store('imagenes', 'public');
+            $validatedData['imagen'] = $imagenPath;
+        }
 
+        // Crear el producto
+        Productos::create($validatedData);
+
+        // Redirigir a la vista de productos con un mensaje de éxito
         return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
     }
 

@@ -12,14 +12,18 @@
             <input type="text" class="form-control" id="descripcion" name="descripcion" required>
         </div>
         <div class="form-group">
-            <label for="pvp">Precio</label>
-            <input type="number" class="form-control" id="pvp" name="pvp" required>
+            <label for="pvp">PVP</label>
+            <input type="text" class="form-control" id="pvp" name="pvp" required>
         </div>
         <div class="form-group">
             <label for="stock">Stock</label>
-            <input type="number" class="form-control" id="stock" name="stock" required>
+            <input type="text" class="form-control" id="stock" name="stock" required>
         </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <div class="form-group">
+            <label for="imagen">Imagen</label>
+            <input type="file" class="form-control-file" id="imagen" name="imagen">
+        </div>
+        <button type="submit" class="btn btn-primary">Crear</button>
     </form>
 </div>
 @endsection
