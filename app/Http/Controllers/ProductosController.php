@@ -23,13 +23,11 @@ class ProductosController extends Controller {
             'descripcion' => 'required|string|max:255',
             'pvp' => 'required|numeric',
             'stock' => 'required|integer',
-            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validación de imagen
         ]);
 
-        if ($request->hasFile('imagen')) {
-            $imagenPath = $request->file('imagen')->store('imagenes', 'public');
-            $validatedData['imagen'] = $imagenPath;
-        }
+        $producto = Productos::create($validatedData);
+        $producto->imagen = $producto->id . '-producto.' . 'jpg';
+        $producto->save();
 
         // Crear el producto
         Productos::create($validatedData);
@@ -57,6 +55,8 @@ class ProductosController extends Controller {
         // Actualizar la información del producto en la base de datos
         $producto = Productos::findOrFail($id);
         $producto->update($request->all());
+        $producto->imagen = $producto->id . '-producto.' . 'jpg';
+        $producto->save();
 
         return redirect()->route('productos.index')->with('success', 'Producto actualizado exitosamente.');
     }

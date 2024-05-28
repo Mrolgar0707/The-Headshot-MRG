@@ -12,7 +12,6 @@ class CreateProductosTable extends Migration {
         $table->string('descripcion');
         $table->decimal('pvp', 8, 2);
         $table->integer('stock');
-        $table->string('imagen')->nullable(); // Nuevo campo para la imagen
         $table->timestamps();
     });
 }

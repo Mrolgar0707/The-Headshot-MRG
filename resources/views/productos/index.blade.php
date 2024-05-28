@@ -26,11 +26,8 @@
                     <td>{{ $producto->pvp }}</td>
                     <td>{{ $producto->stock }}</td>
                     <td>
-                        @if ($producto->imagen)
-                            <img src="{{ asset('storage/' . $producto->imagen) }}" alt="Imagen del producto" width="50">
-                        @else
-                            N/A
-                        @endif
+                        <img src="{{ asset('img/' . $producto->imagen) }}" alt="{{ $producto->descripcion }}" width="100">
+
                     </td>
                     <td>
                         <a href="{{ route('productos.show', $producto->id) }}" class="btn btn-info">Ver</a>

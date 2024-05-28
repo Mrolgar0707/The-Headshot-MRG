@@ -19,10 +19,6 @@
             <label for="stock">Stock</label>
             <input type="text" class="form-control" id="stock" name="stock" required>
         </div>
-        <div class="form-group">
-            <label for="imagen">Imagen</label>
-            <input type="file" class="form-control-file" id="imagen" name="imagen">
-        </div>
         <button type="submit" class="btn btn-primary">Crear</button>
     </form>
 </div>
