@@ -11,10 +11,10 @@ class DetallePedido extends Model {
 
     // Relaciones
     public function producto() {
-        return $this->belongsTo(Producto::class);
+        return $this->belongsTo(Productos::class);
     }
 
     public function pedido() {
-        return $this->belongsTo(Pedido::class);
+        return $this->belongsTo(Pedidos::class);
     }
 }
