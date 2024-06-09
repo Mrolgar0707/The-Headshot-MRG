@@ -9,21 +9,49 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
         crossorigin="anonymous">
     <!-- Agrega tus estilos personalizados aquí -->
+    <style>
+        .auth-button {
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            padding: 5px 15px;
+            margin-left: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .auth-button:hover {
+            background-color: #0056b3;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: white;
+        }
+
+        .navbar-brand img {
+            height: 40px; /* Ajusta este tamaño según sea necesario */
+            margin-right: 10px;
+        }
+    </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">The Headshot</a>
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <img src="{{ asset('img/logo.png') }}" alt="Logo">
+
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">Inicio</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('productos.index') }}">Productos</a>
                     </li>
@@ -33,6 +61,24 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('usuarios.index') }}">Usuarios</a>
                     </li>
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link auth-button" href="{{ route('login') }}">Iniciar Sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link auth-button" href="{{ route('register') }}">Registrarse</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Cerrar Sesión
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    @endguest
                 </ul>
             </div>
         </div>
