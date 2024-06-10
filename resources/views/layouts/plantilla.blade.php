@@ -11,7 +11,7 @@
     <!-- Agrega tus estilos personalizados aquí -->
     <style>
         .auth-button {
-            background-color: #007bff;
+            background-color: #b3001b;
             color: white;
             border-radius: 5px;
             padding: 5px 15px;
@@ -21,7 +21,7 @@
         }
 
         .auth-button:hover {
-            background-color: #0056b3;
+            background-color: #fc062b;
         }
 
         .navbar-nav .nav-link {
@@ -35,6 +35,14 @@
         .navbar-brand img {
             height: 40px; /* Ajusta este tamaño según sea necesario */
             margin-right: 10px;
+        }
+        .btn-primary {
+            background-color: red;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: darkred;
         }
     </style>
 </head>
