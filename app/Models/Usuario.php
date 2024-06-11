@@ -10,7 +10,7 @@ class Usuario extends Model implements AuthenticatableContract
 {
     use Authenticatable;
 
-    protected $table = 'usuarios'; // Asegúrate de que esto esté configurado correctamente
+    protected $table = 'usuarios';
 
     protected $fillable = [
         'usuario', 'contraseña', 'nombre', 'apellidos', 'email', 'calle', 'codigo_postal', 'numero_calle',
@@ -20,7 +20,6 @@ class Usuario extends Model implements AuthenticatableContract
         'contraseña', 'remember_token',
     ];
 
-    // Si estás usando Laravel 9 o superior, asegúrate de que el atributo de contraseña esté nombrado correctamente.
     public function getAuthPassword()
     {
         return $this->contraseña;

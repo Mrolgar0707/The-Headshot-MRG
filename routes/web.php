@@ -43,6 +43,8 @@ Route::resource('productos', ProductosController::class);
 Route::resource('usuarios', UsuarioController::class);
 Route::resource('pedidos', PedidosController::class);
 
+Route::get('/productos/comprar/{id}', [ProductosController::class, 'comprar'])->name('productos.comprar');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {

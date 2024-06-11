@@ -37,6 +37,7 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Eliminar</button>
                         </form>
+                        <a href="{{ route('productos.comprar', $producto->id) }}" class="btn btn-primary">Comprar</a>
                     </td>
                 </tr>
             @endforeach

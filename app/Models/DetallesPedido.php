@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class DetallesPedido extends Model {
+
+    protected $table = 'detalles_pedido';
     protected $fillable = [
         'cantidad', 'precio', 'producto_id', 'pedido_id',
     ];

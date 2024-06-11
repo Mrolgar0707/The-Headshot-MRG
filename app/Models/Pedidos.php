@@ -15,6 +15,6 @@ class pedidos extends Model {
     }
 
     public function detallesPedido() {
-        return $this->hasMany(DetallePedido::class);
+        return $this->hasMany(DetallesPedido::class);
     }
 }

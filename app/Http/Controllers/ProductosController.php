@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Productos;
+use App\Models\Pedidos;
+use App\Models\DetallesPedido;
+use Illuminate\Support\Facades\Auth;
 
 class ProductosController extends Controller {
     public function index() {
@@ -59,6 +62,34 @@ class ProductosController extends Controller {
         $producto->save();
 
         return redirect()->route('productos.index')->with('success', 'Producto actualizado exitosamente.');
+    }
+
+    public function comprar($id) {
+        // Verifica si el usuario está autenticado
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Debe iniciar sesión para realizar una compra.');
+        }
+
+        $producto = Productos::findOrFail($id);
+
+        // Crea un nuevo pedido
+        $pedido = new Pedidos();
+        $pedido->fecha_pedido = now();
+        $pedido->fecha_envio = now()->addDays(3); // Por ejemplo, enviar en 3 días
+        $pedido->total_pedido = $producto->pvp;
+        $pedido->usuario_id = Auth::id();
+        $pedido->save();
+
+        // Crea los detalles del pedido
+        $detallePedido = new DetallesPedido();
+        $detallePedido->cantidad = 1; // Por defecto, compra una unidad
+        $detallePedido->precio = $producto->pvp;
+        $detallePedido->producto_id = $producto->id;
+        $detallePedido->pedido_id = $pedido->id;
+        $detallePedido->save();
+
+        // Redirigir a la vista de productos con un mensaje de éxito
+        return redirect()->route('productos.index')->with('success', 'Producto comprado exitosamente.');
     }
 
     public function destroy($id) {

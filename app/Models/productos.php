@@ -12,6 +12,6 @@ class Productos extends Model {
 
     // Relaciones
     public function detallesPedido() {
-        return $this->hasMany(DetallePedido::class);
+        return $this->hasMany(DetallesPedido::class);
     }
 }
