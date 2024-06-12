@@ -45,11 +45,13 @@
             background-color: darkred;
         }
         body {
-    background-image: url('/img/fondo.jpg');
+    /*background-image: url('/img/fondo.jpg');*/
+    background-color: #ff0026;
     background-size: cover; /* Cubre completamente el área del index */
     background-position: center; /* Centra la imagen */
     /* Otras propiedades de estilo según sea necesario */
     background-repeat: no-repeat;
+    color: white; /* Este cambiará el color de la letra a blanco para toda la aplicación */
 }
     </style>
 </head>
