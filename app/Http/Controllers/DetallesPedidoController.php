@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\DetallePedido;
+use App\Models\DetallesPedido;
 
 class DetallesPedidoController extends Controller {
     public function index() {
-        $detallesPedido = DetallePedido::all();
+        $detallesPedido = DetallesPedido::all();
         return view('detalles_pedido.index', compact('detallesPedido'));
     }
 
@@ -22,29 +22,29 @@ class DetallesPedidoController extends Controller {
         ]);
 
         // Crear un nuevo detalle de pedido en la base de datos
-        DetallePedido::create($request->all());
+        DetallesPedido::create($request->all());
 
         return redirect()->route('detalles_pedido.index')->with('success', 'Detalle de pedido creado exitosamente.');
     }
 
     public function show($id) {
-        $detallePedido = DetallePedido::findOrFail($id);
+        $detallePedido = DetallesPedido::findOrFail($id);
         return view('detalles_pedido.show', compact('detallePedido'));
     }
 
     public function edit($id) {
-        $detallePedido = DetallePedido::findOrFail($id);
+        $detallePedido = DetallesPedido::findOrFail($id);
         return view('detalles_pedido.edit', compact('detallePedido'));
     }
 
     public function update(Request $request, $id) {
         // Validar los datos del formulario
         $request->validate([
-            // Agregar reglas de validación según sea necesario
+
         ]);
 
         // Actualizar la información del detalle de pedido en la base de datos
-        $detallePedido = DetallePedido::findOrFail($id);
+        $detallePedido = DetallesPedido::findOrFail($id);
         $detallePedido->update($request->all());
 
         return redirect()->route('detalles_pedido.index')->with('success', 'Detalle de pedido actualizado exitosamente.');
@@ -52,7 +52,7 @@ class DetallesPedidoController extends Controller {
 
     public function destroy($id) {
         // Eliminar un detalle de pedido de la base de datos
-        $detallePedido = DetallePedido::findOrFail($id);
+        $detallePedido = DetallesPedido::findOrFail($id);
         $detallePedido->delete();
 
         return redirect()->route('detalles_pedido.index')->with('success', 'Detalle de pedido eliminado exitosamente.');

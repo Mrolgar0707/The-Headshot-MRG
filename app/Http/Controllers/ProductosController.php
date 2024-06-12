@@ -52,7 +52,6 @@ class ProductosController extends Controller {
     public function update(Request $request, $id) {
         // Validar los datos del formulario
         $request->validate([
-            // Agregar reglas de validación según sea necesario
         ]);
 
         // Actualizar la información del producto en la base de datos

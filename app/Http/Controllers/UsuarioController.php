@@ -43,7 +43,7 @@ class UsuarioController extends Controller {
         $request->validate([
             'usuario' => 'required',
             'contraseña' => 'required',
-            // Agregar otras reglas de validación según sea necesario
+
         ]);
 
         // Actualizar la información del usuario en la base de datos
