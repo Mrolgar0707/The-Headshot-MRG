@@ -33,7 +33,7 @@
         }
 
         .navbar-brand img {
-            height: 40px; /* Ajusta este tamaño según sea necesario */
+            height: 40px;
             margin-right: 10px;
         }
         .btn-primary {
@@ -44,6 +44,13 @@
         .btn-primary:hover {
             background-color: darkred;
         }
+        body {
+    background-image: url('/img/fondo.jpg');
+    background-size: cover; /* Cubre completamente el área del index */
+    background-position: center; /* Centra la imagen */
+    /* Otras propiedades de estilo según sea necesario */
+    background-repeat: no-repeat;
+}
     </style>
 </head>
 
@@ -66,9 +73,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('pedidos.index') }}">Pedidos</a>
                     </li>
+                    <!--
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('usuarios.index') }}">Usuarios</a>
                     </li>
+                -->
                     @guest
                         <li class="nav-item">
                             <a class="nav-link auth-button" href="{{ route('login') }}">Iniciar Sesión</a>
